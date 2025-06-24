@@ -38,6 +38,7 @@ function RootInner({ children }: PropsWithChildren) {
                         ? "ios"
                         : "base"
                 }
+                className="pt-16"
             >
                 {children}
             </AppRoot>

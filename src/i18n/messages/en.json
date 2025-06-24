@@ -3,5 +3,10 @@
         "gallery": "Gallery",
         "about": "About",
         "tip": "Tip"
+    },
+
+    "Gallery": {
+        "title": "Gallery",
+        "viewDetails": "View Details"
     }
 }
