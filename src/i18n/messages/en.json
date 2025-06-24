@@ -1,1 +1,7 @@
-{}
+{
+    "BottomNav": {
+        "gallery": "Gallery",
+        "about": "About",
+        "tip": "Tip"
+    }
+}
