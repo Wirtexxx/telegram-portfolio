@@ -3,5 +3,14 @@
         "gallery": "Галерея",
         "about": "Инфо",
         "tip": "Чаевые"
+    },
+    "Gallery": {
+        "title": "Портфолио",
+        "viewDetails": "Больше",
+        "visitWebsite": "Перейти к продукту",
+        "review": "Отзыв",
+        "close": "Закрыть",
+        "back": "Назад",
+        "notFound": "Не найдено"
     }
 }
