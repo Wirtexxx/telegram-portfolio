@@ -58,7 +58,7 @@ export default function AboutPage() {
 
                 {/* Profile Card */}
                 <div
-                    ref={profileCardRef} // ---
+                    ref={profileCardRef}
                     className="bg-gray-900 rounded-2xl shadow-xl overflow-hidden"
                 >
                     <div className="relative">
@@ -180,7 +180,7 @@ export default function AboutPage() {
 
                 {/* Philosophy Section */}
                 <div
-                    ref={philosophyRef} // ---
+                    ref={philosophyRef}
                     className="mt-12 bg-gray-900 rounded-2xl shadow-xl overflow-hidden"
                 >
                     <div className="p-8">
@@ -230,7 +230,7 @@ export default function AboutPage() {
 
                 {/* Call to Action */}
                 <div
-                    ref={ctaRef} // ---
+                    ref={ctaRef}
                     className="mt-12 text-center p-8 bg-gradient-to-r from-purple-900/30 to-indigo-900/30 rounded-2xl border border-purple-500/20"
                 >
                     <h2 className="text-2xl font-bold text-gray-100 mb-4">
