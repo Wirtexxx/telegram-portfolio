@@ -10,7 +10,7 @@
 !.yarn/releases
 !.yarn/versions
 
-MockEnv.ts
+# MockEnv.ts
 # testing
 /coverage
 
