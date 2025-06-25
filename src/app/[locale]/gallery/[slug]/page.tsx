@@ -5,7 +5,7 @@ import { useTranslations, useLocale } from "next-intl";
 import { useParams, useRouter } from "next/navigation";
 import type { GalleryItem } from "@/types";
 import TryAgain from "@/components/TryAgain/TryAgain";
-import Image from "next/image";
+// import Image from "next/image";
 import { Page } from "@/components/Page";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
