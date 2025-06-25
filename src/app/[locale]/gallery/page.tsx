@@ -11,6 +11,8 @@ import "swiper/css/effect-coverflow";
 import type { GalleryItem } from "@/types";
 import TryAgain from "@/components/TryAgain/TryAgain";
 import { Page } from "@/components/Page";
+import { MdArrowOutward } from "react-icons/md";
+
 import Image from "next/image";
 
 export default function GalleryPage() {
@@ -133,7 +135,16 @@ export default function GalleryPage() {
                                                     {localizedItem.description}
                                                 </p>
 
-                                                <div className="flex justify-end items-end mt-auto">
+                                                <div className="flex justify-between items-end mt-auto">
+                                                    <div
+                                                        className={`px-4 py-1 rounded-full flex gap-2 items-center`}
+                                                        style={{
+                                                            background: `${item.color}`,
+                                                        }}
+                                                    >
+                                                        {t("viewDetails")}
+                                                        <MdArrowOutward />
+                                                    </div>
                                                     <span className="text-lg font-bold text-gray-100">
                                                         {localizedItem.price}
                                                     </span>

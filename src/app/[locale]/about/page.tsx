@@ -85,8 +85,8 @@ export default function AboutPage() {
                                 </div>
                             </div>
 
-                            <div className="text-center md:text-left">
-                                <h2 className="text-3xl font-bold text-gray-100 mb-1">
+                            <div className="text-center md:text-left gap-2 flex flex-col">
+                                <h2 className="text-3xl font-bold text-gray-100">
                                     {localizedItem.name}
                                 </h2>
                                 <Link
@@ -96,7 +96,7 @@ export default function AboutPage() {
                                     @{localizedItem.username}
                                 </Link>
 
-                                <div className="flex justify-center md:justify-start space-x-4">
+                                <div className="flex justify-center md:justify-start space-x-8">
                                     {localizedItem.links.telegram_channel && (
                                         <a
                                             href={
@@ -108,7 +108,7 @@ export default function AboutPage() {
                                             className="text-gray-300 hover:text-purple-400 transition-colors"
                                             aria-label="Telegram"
                                         >
-                                            <FaTelegram size={24} />
+                                            <FaTelegram size={32} />
                                         </a>
                                     )}
 
@@ -120,7 +120,7 @@ export default function AboutPage() {
                                             className="text-gray-300 hover:text-purple-400 transition-colors"
                                             aria-label="Website"
                                         >
-                                            <FaGlobe size={24} />
+                                            <FaGlobe size={32} />
                                         </a>
                                     )}
 
@@ -132,7 +132,7 @@ export default function AboutPage() {
                                             className="text-gray-300 hover:text-purple-400 transition-colors"
                                             aria-label="GitHub"
                                         >
-                                            <FaGithub size={24} />
+                                            <FaGithub size={32} />
                                         </a>
                                     )}
                                 </div>

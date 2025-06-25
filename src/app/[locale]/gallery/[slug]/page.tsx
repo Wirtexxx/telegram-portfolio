@@ -66,22 +66,19 @@ export default function GallerySlugPage() {
                         border: `1px solid ${item.color}`,
                     }}
                 >
-                    <div className="w-full h-72 bg-gray-800 flex items-center justify-center overflow-hidden">
+                    <div className="w-full bg-gray-800 flex items-center justify-center overflow-hidden">
                         <Swiper
                             navigation
                             pagination={{ clickable: true }}
                             modules={[Navigation, Pagination]}
-                            className="w-full h-72"
+                            className="w-full"
                         >
                             {item.img.map((img, idx) => (
                                 <SwiperSlide key={idx}>
-                                    <Image
+                                    <img
                                         src={img}
                                         alt={localizedItem.title}
-                                        width={288}
-                                        height={288}
-                                        className="object-contain max-h-full max-w-full mx-auto"
-                                        priority={idx === 0}
+                                        className="object-cover max-h-full max-w-full mx-auto"
                                     />
                                 </SwiperSlide>
                             ))}
