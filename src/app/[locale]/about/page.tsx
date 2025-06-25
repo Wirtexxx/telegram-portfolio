@@ -6,6 +6,7 @@ import { FaTelegram, FaGlobe, FaGithub, FaHeart } from "react-icons/fa";
 import Link from "next/link";
 import type { InfoData } from "@/types";
 import TryAgain from "@/components/TryAgain/TryAgain";
+import Image from "next/image";
 
 export default function AboutPage() {
     const t = useTranslations("About");
@@ -27,7 +28,7 @@ export default function AboutPage() {
                 }
                 const data = await response.json();
                 setInfo(data);
-            } catch (err) {
+            } catch {
                 setError("An error occurred while loading information");
             }
         };
@@ -69,13 +70,15 @@ export default function AboutPage() {
                         <div className="relative z-10 p-8 flex flex-col md:flex-row items-center">
                             <div className="relative mb-6 md:mb-0 md:mr-8">
                                 <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-purple-500/30 overflow-hidden">
-                                    <img
+                                    <Image
                                         src={localizedItem.avatar}
                                         alt={localizedItem.name}
+                                        width={160}
+                                        height={160}
                                         className="w-full h-full object-cover"
                                     />
                                 </div>
-                                <div className="absolute bottom-2 right-2 bg-gray-900 rounded-full p-2 border-2 border-purple-500">
+                                <div className="absolute bottom-2 right-2 bg-gray-900 rounded-full py-1 px-2 border-2 border-purple-500">
                                     <span className="text-xl">
                                         {localizedItem.status}
                                     </span>

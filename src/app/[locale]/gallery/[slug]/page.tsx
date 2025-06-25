@@ -5,6 +5,7 @@ import { useTranslations, useLocale } from "next-intl";
 import { useParams, useRouter } from "next/navigation";
 import type { GalleryItem } from "@/types";
 import TryAgain from "@/components/TryAgain/TryAgain";
+import Image from "next/image";
 
 export default function GallerySlugPage() {
     const t = useTranslations("Gallery");
@@ -27,7 +28,7 @@ export default function GallerySlugPage() {
                 const found = data.find((el: GalleryItem) => el.slug === slug);
                 if (!found) throw new Error("Not found");
                 setItem(found);
-            } catch (err: any) {
+            } catch {
                 setError("Not found");
             }
         };
@@ -59,9 +60,10 @@ export default function GallerySlugPage() {
                 }}
             >
                 <div className="w-full h-72 bg-gray-800 flex items-center justify-center overflow-hidden">
-                    <img
+                    <Image
                         src={item.img}
                         alt={localizedItem.title}
+                        objectFit="cover"
                         className="object-contain max-h-full max-w-full"
                     />
                 </div>

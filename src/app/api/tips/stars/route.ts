@@ -34,11 +34,8 @@ export async function POST(req: NextRequest) {
         }
 
         return NextResponse.json({ invoiceLink: invoiceRes.result.url });
-    } catch (e: any) {
-        return NextResponse.json(
-            { error: e.message || "Ошибка сервера" },
-            { status: 500 }
-        );
+    } catch {
+        return NextResponse.json({ error: "Ошибка сервера" }, { status: 500 });
     }
 }
 
