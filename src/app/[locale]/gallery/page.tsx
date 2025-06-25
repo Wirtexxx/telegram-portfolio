@@ -51,7 +51,7 @@ export default function GalleryPage() {
 
     return (
         <Page>
-            <div className="min-h-[100vh-104px-64px] bg-gray-950 flex flex-col justify-center items-center py-8">
+            <div className="bg-gray-950 flex flex-col justify-center items-center py-8">
                 <h1 className="text-3xl md:text-4xl font-bold text-center text-gray-100 mb-10">
                     {t("title")}
                 </h1>
@@ -116,7 +116,7 @@ export default function GalleryPage() {
                                         <div className="w-full h-full flex flex-col">
                                             <div className="relative h-3/5">
                                                 <Image
-                                                    src={item.img}
+                                                    src={item.img[0]}
                                                     alt={localizedItem.title}
                                                     className="w-full h-full object-cover"
                                                     width={280}
