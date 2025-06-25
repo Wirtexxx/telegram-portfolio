@@ -33,7 +33,7 @@ function RootInner({ children }: PropsWithChildren) {
                         ? "ios"
                         : "base"
                 }
-                className="pb-28"
+                className="pb-28 pt-24"
             >
                 {children}
             </AppRoot>
