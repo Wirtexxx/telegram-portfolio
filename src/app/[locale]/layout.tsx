@@ -2,7 +2,8 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import "../globals.css";
-import Nav from "@/components/NavBar/NavBar";
+import BottomNav from "@/components/NavBar/BottomNavBar";
+import TopNav from "@/components/NavBar/TopNavBar";
 // import Footer from "@/components/Footer/Footer";
 import { Root } from "@/components/Root/Root";
 
@@ -22,8 +23,11 @@ export default async function LocaleLayout({
         <html lang={locale}>
             <body className="min-h-screen flex flex-col p-0">
                 <NextIntlClientProvider locale={locale}>
-                    <Root>{children}</Root>
-                    <Nav />
+                    <Root>
+                        <TopNav locale={locale} />
+                        {children}
+                    </Root>
+                    <BottomNav />
                     {/* Uncomment the line below to enable the footer */}
                     {/* <Footer /> */}
                 </NextIntlClientProvider>
