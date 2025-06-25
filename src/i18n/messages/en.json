@@ -8,5 +8,19 @@
     "Gallery": {
         "title": "Gallery",
         "viewDetails": "View Details"
+    },
+
+    "About": {
+        "title": "About Me",
+        "subtitle": "Get to know the person behind the code",
+        "philosophyTitle": "My Philosophy",
+        "passionTitle": "Passion Driven",
+        "passionText": "I believe that passion is the fuel for extraordinary work. Every project is approached with enthusiasm and dedication.",
+        "innovationTitle": "Innovation Focused",
+        "innovationText": "Pushing boundaries and exploring new possibilities is at the core of everything I create.",
+        "ctaTitle": "Let's Connect",
+        "ctaText": "Feel free to reach out if you want to collaborate or just say hello!",
+        "telegramButton": "Message on Telegram",
+        "githubButton": "View GitHub Profile"
     }
 }

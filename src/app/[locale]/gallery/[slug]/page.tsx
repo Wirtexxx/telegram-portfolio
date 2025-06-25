@@ -3,17 +3,8 @@
 import React, { useEffect, useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { useParams, useRouter } from "next/navigation";
-
-type GalleryItem = {
-    slug: string;
-    title: Record<string, string>;
-    description: Record<string, string>;
-    color: string;
-    img: string;
-    link: string;
-    price: Record<string, string>;
-    review: Record<string, string>;
-};
+import type { GalleryItem } from "@/types";
+import TryAgain from "@/components/TryAgain/TryAgain";
 
 export default function GallerySlugPage() {
     const t = useTranslations("Gallery");
@@ -22,7 +13,6 @@ export default function GallerySlugPage() {
     const router = useRouter();
 
     const [item, setItem] = useState<GalleryItem | null>(null);
-    const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
     const slug = Array.isArray(params.slug) ? params.slug[0] : params.slug;
@@ -39,8 +29,6 @@ export default function GallerySlugPage() {
                 setItem(found);
             } catch (err: any) {
                 setError("Not found");
-            } finally {
-                setIsLoading(false);
             }
         };
 
@@ -55,29 +43,8 @@ export default function GallerySlugPage() {
         review: item.review[locale] || item.review.en || "",
     });
 
-    if (isLoading) {
-        return (
-            <div className="flex items-center justify-center min-h-screen">
-                <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-gray-500"></div>
-            </div>
-        );
-    }
-
     if (error || !item) {
-        return (
-            <div className="flex flex-col items-center justify-center min-h-screen">
-                <h2 className="text-2xl font-bold text-gray-100 mb-4">404</h2>
-                <p className="text-gray-400 mb-6">
-                    {t("notFound") || "Not found"}
-                </p>
-                <button
-                    onClick={() => router.back()}
-                    className="px-4 py-2 bg-gray-700 text-gray-100 rounded-lg hover:bg-gray-600 transition-colors"
-                >
-                    {t("back") || "Back"}
-                </button>
-            </div>
-        );
+        return <TryAgain error={error || ""} />;
     }
 
     const localizedItem = getLocalizedData(item);
