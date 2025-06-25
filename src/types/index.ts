@@ -16,7 +16,7 @@ export type GalleryItem = {
     title: Record<string, string>;
     description: Record<string, string>;
     color: string;
-    img: string;
+    img: string[];
     link: string;
     price: Record<string, string>;
     review: Record<string, string>;
