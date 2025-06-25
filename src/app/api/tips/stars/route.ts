@@ -5,7 +5,7 @@ const PROVIDER_TOKEN = process.env.TELEGRAM_STARS_PROVIDER_TOKEN!;
 
 type CreateInvoiceLinkResponse = {
     ok: boolean;
-    result?: { url: string };
+    result?: string;
     description?: string;
 };
 
@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        return NextResponse.json({ invoiceLink: invoiceRes.result.url });
+        return NextResponse.json({ invoiceLink: invoiceRes.result });
     } catch {
         return NextResponse.json({ error: "Ошибка сервера" }, { status: 500 });
     }
@@ -50,7 +50,7 @@ async function createStarsInvoice(
         payload: `support_stars_user_${user_id}_${Date.now()}`,
         provider_token: PROVIDER_TOKEN,
         currency: "XTR",
-        prices: [{ label: "Звёзды", amount }], // amount — целое число
+        prices: [{ label: "Звёзды", amount }],
     };
 
     const res = await fetch(url, {

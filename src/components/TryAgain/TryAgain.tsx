@@ -5,7 +5,7 @@ interface TryAgainProps {
 }
 export default function TryAgain({ error }: TryAgainProps) {
     return (
-        <div className="flex items-center justify-center min-h-screen">
+        <div className="flex items-center justify-center min-h-[calc(100vh-250px)]">
             <div className="text-center p-8 bg-gray-800 rounded-xl max-w-md">
                 <h2 className="text-xl font-bold text-gray-100 mb-4">Error</h2>
                 <p className="text-gray-400 mb-6">{error}</p>
