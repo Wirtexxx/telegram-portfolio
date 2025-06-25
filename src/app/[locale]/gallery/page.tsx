@@ -10,6 +10,7 @@ import "swiper/css/navigation";
 import "swiper/css/effect-coverflow";
 import type { GalleryItem } from "@/types";
 import TryAgain from "@/components/TryAgain/TryAgain";
+import { Page } from "@/components/Page";
 
 export default function GalleryPage() {
     const t = useTranslations("Gallery");
@@ -48,99 +49,101 @@ export default function GalleryPage() {
     }
 
     return (
-        <div className="min-h-[100vh-104px-64px] bg-gray-950 flex flex-col justify-center items-center py-8">
-            <h1 className="text-3xl md:text-4xl font-bold text-center text-gray-100 mb-10">
-                {t("title")}
-            </h1>
+        <Page>
+            <div className="min-h-[100vh-104px-64px] bg-gray-950 flex flex-col justify-center items-center py-8">
+                <h1 className="text-3xl md:text-4xl font-bold text-center text-gray-100 mb-10">
+                    {t("title")}
+                </h1>
 
-            {/* SWIPER 3D COVERFLOW */}
-            <div className="flex-1 w-full flex justify-center items-center">
-                <div className="w-full max-w-5xl flex justify-center mx-auto h-[520px]">
-                    <Swiper
-                        modules={[Navigation, EffectCoverflow]}
-                        effect="coverflow"
-                        grabCursor={true}
-                        centeredSlides={true}
-                        slidesPerView="auto"
-                        spaceBetween={30}
-                        coverflowEffect={{
-                            rotate: 5,
-                            stretch: 0,
-                            depth: 100,
-                            modifier: 2.5,
-                            slideShadows: true,
-                        }}
-                        className="mySwiper h-full"
-                        breakpoints={{
-                            640: {
-                                coverflowEffect: {
-                                    rotate: 10,
-                                    depth: 150,
-                                    modifier: 3,
+                {/* SWIPER 3D COVERFLOW */}
+                <div className="flex-1 w-full flex justify-center items-center">
+                    <div className="w-full max-w-5xl flex justify-center mx-auto h-[520px]">
+                        <Swiper
+                            modules={[Navigation, EffectCoverflow]}
+                            effect="coverflow"
+                            grabCursor={true}
+                            centeredSlides={true}
+                            slidesPerView="auto"
+                            spaceBetween={30}
+                            coverflowEffect={{
+                                rotate: 5,
+                                stretch: 0,
+                                depth: 100,
+                                modifier: 2.5,
+                                slideShadows: true,
+                            }}
+                            className="mySwiper h-full"
+                            breakpoints={{
+                                640: {
+                                    coverflowEffect: {
+                                        rotate: 10,
+                                        depth: 150,
+                                        modifier: 3,
+                                    },
+                                    spaceBetween: 40,
                                 },
-                                spaceBetween: 40,
-                            },
-                            1024: {
-                                coverflowEffect: {
-                                    rotate: 15,
-                                    depth: 200,
-                                    modifier: 3.5,
+                                1024: {
+                                    coverflowEffect: {
+                                        rotate: 15,
+                                        depth: 200,
+                                        modifier: 3.5,
+                                    },
+                                    spaceBetween: 50,
                                 },
-                                spaceBetween: 50,
-                            },
-                        }}
-                    >
-                        {items.map((item) => {
-                            const localizedItem = getLocalizedData(item);
-                            return (
-                                <SwiperSlide
-                                    key={item.slug}
-                                    style={{
-                                        width: "280px",
-                                        height: "520px",
-                                        borderRadius: "20px",
-                                        overflow: "hidden",
-                                        position: "relative",
-                                        background: item.color,
-                                        boxShadow:
-                                            "0 15px 30px rgba(0,0,0,0.5)",
-                                        cursor: "pointer",
-                                    }}
-                                    onClick={() =>
-                                        router.push(`/gallery/${item.slug}`)
-                                    }
-                                >
-                                    <div className="w-full h-full flex flex-col">
-                                        <div className="relative h-3/5">
-                                            <img
-                                                src={item.img}
-                                                alt={localizedItem.title}
-                                                className="w-full h-full object-cover"
-                                            />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-                                        </div>
+                            }}
+                        >
+                            {items.map((item) => {
+                                const localizedItem = getLocalizedData(item);
+                                return (
+                                    <SwiperSlide
+                                        key={item.slug}
+                                        style={{
+                                            width: "280px",
+                                            height: "520px",
+                                            borderRadius: "20px",
+                                            overflow: "hidden",
+                                            position: "relative",
+                                            background: item.color,
+                                            boxShadow:
+                                                "0 15px 30px rgba(0,0,0,0.5)",
+                                            cursor: "pointer",
+                                        }}
+                                        onClick={() =>
+                                            router.push(`/gallery/${item.slug}`)
+                                        }
+                                    >
+                                        <div className="w-full h-full flex flex-col">
+                                            <div className="relative h-3/5">
+                                                <img
+                                                    src={item.img}
+                                                    alt={localizedItem.title}
+                                                    className="w-full h-full object-cover"
+                                                />
+                                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                                            </div>
 
-                                        <div className="flex-1 flex flex-col p-5 bg-gradient-to-b from-gray-900 to-gray-950">
-                                            <h3 className="text-xl font-bold text-gray-100 mb-2 line-clamp-1">
-                                                {localizedItem.title}
-                                            </h3>
-                                            <p className="text-gray-400 text-sm line-clamp-2 mb-4 flex-grow">
-                                                {localizedItem.description}
-                                            </p>
+                                            <div className="flex-1 flex flex-col p-5 bg-gradient-to-b from-gray-900 to-gray-950">
+                                                <h3 className="text-xl font-bold text-gray-100 mb-2 line-clamp-1">
+                                                    {localizedItem.title}
+                                                </h3>
+                                                <p className="text-gray-400 text-sm line-clamp-2 mb-4 flex-grow">
+                                                    {localizedItem.description}
+                                                </p>
 
-                                            <div className="flex justify-end items-end mt-auto">
-                                                <span className="text-lg font-bold text-gray-100">
-                                                    {localizedItem.price}
-                                                </span>
+                                                <div className="flex justify-end items-end mt-auto">
+                                                    <span className="text-lg font-bold text-gray-100">
+                                                        {localizedItem.price}
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </SwiperSlide>
-                            );
-                        })}
-                    </Swiper>
+                                    </SwiperSlide>
+                                );
+                            })}
+                        </Swiper>
+                    </div>
                 </div>
             </div>
-        </div>
+        </Page>
     );
 }
