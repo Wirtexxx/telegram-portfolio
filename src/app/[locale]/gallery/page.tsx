@@ -8,17 +8,8 @@ import { Navigation, EffectCoverflow } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/effect-coverflow";
-
-type GalleryItem = {
-    slug: string;
-    title: Record<string, string>;
-    description: Record<string, string>;
-    color: string;
-    img: string;
-    link: string;
-    price: Record<string, string>;
-    review: Record<string, string>;
-};
+import type { GalleryItem } from "@/types";
+import TryAgain from "@/components/TryAgain/TryAgain";
 
 export default function GalleryPage() {
     const t = useTranslations("Gallery");
@@ -26,7 +17,6 @@ export default function GalleryPage() {
     const router = useRouter();
 
     const [items, setItems] = useState<GalleryItem[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
@@ -39,8 +29,6 @@ export default function GalleryPage() {
                 setItems(data);
             } catch (err) {
                 setError("An error occurred");
-            } finally {
-                setIsLoading(false);
             }
         };
 
@@ -55,31 +43,8 @@ export default function GalleryPage() {
         review: item.review[locale] || item.review.en || "",
     });
 
-    if (isLoading) {
-        return (
-            <div className="flex items-center justify-center min-h-screen">
-                <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-gray-500"></div>
-            </div>
-        );
-    }
-
     if (error) {
-        return (
-            <div className="flex items-center justify-center min-h-screen">
-                <div className="text-center p-8 bg-gray-800 rounded-xl max-w-md">
-                    <h2 className="text-xl font-bold text-gray-100 mb-4">
-                        Error
-                    </h2>
-                    <p className="text-gray-400 mb-6">{error}</p>
-                    <button
-                        onClick={() => window.location.reload()}
-                        className="px-4 py-2 bg-gray-700 text-gray-100 rounded-lg hover:bg-gray-600 transition-colors"
-                    >
-                        Try Again
-                    </button>
-                </div>
-            </div>
-        );
+        return <TryAgain error={error} />;
     }
 
     return (
