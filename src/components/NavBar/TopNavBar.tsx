@@ -22,11 +22,9 @@ const TopNav = ({ locale }: { locale: string }) => {
     return (
         <nav className="fixedp-4 pt-8 justify-between flex items-center">
             <LanguageSwitcher locale={locale} />
-            <List>
-                {"imageUrl" in wallet && (
-                    <TonConnectButton className={e("button-connected")} />
-                )}
-            </List>
+            {"imageUrl" in wallet && (
+                <TonConnectButton className={e("button-connected")} />
+            )}
         </nav>
     );
 };
