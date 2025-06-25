@@ -11,6 +11,7 @@ import "swiper/css/effect-coverflow";
 import type { GalleryItem } from "@/types";
 import TryAgain from "@/components/TryAgain/TryAgain";
 import { Page } from "@/components/Page";
+import Image from "next/image";
 
 export default function GalleryPage() {
     const t = useTranslations("Gallery");
@@ -28,7 +29,7 @@ export default function GalleryPage() {
                     throw new Error("Failed to fetch gallery data");
                 const data = await response.json();
                 setItems(data);
-            } catch (err) {
+            } catch {
                 setError("An error occurred");
             }
         };
@@ -114,10 +115,12 @@ export default function GalleryPage() {
                                     >
                                         <div className="w-full h-full flex flex-col">
                                             <div className="relative h-3/5">
-                                                <img
+                                                <Image
                                                     src={item.img}
                                                     alt={localizedItem.title}
                                                     className="w-full h-full object-cover"
+                                                    width={280}
+                                                    height={520}
                                                 />
                                                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
                                             </div>

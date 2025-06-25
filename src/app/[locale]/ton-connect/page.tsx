@@ -43,11 +43,6 @@ export default function TONConnectPage() {
         );
     }
 
-    const {
-        account: { chain, publicKey, address },
-        device: { appName, appVersion, maxProtocolVersion, platform, features },
-    } = wallet;
-
     return (
         <Page>
             <List>

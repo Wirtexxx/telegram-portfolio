@@ -22,5 +22,23 @@
         "ctaText": "Feel free to reach out if you want to collaborate or just say hello!",
         "telegramButton": "Message on Telegram",
         "githubButton": "View GitHub Profile"
+    },
+    "Tip": {
+        "tipTitle": "Leave a Tip",
+        "tipSubtitle": "Support the project — send Telegram Stars or TON!",
+        "stars": "Telegram Stars",
+        "starsSend": "Send tip with Stars",
+        "ton": "TON (crypto tip)",
+        "tonSend": "Send tip with TON",
+        "minTon": "Minimum 0.1 TON",
+        "connectTon": "Connect TON wallet to send a tip",
+        "paymentWait": "Waiting for payment…",
+        "starsSent": "Thank you! Stars tip sent 🎉",
+        "tonSent": "Tip sent! Thank you 🎉",
+        "paymentCanceled": "Payment canceled",
+        "telegramUserNotFound": "Telegram user not found",
+        "paymentError": "Error sending stars",
+        "starsMin": "Min.",
+        "starsMax": "Max."
     }
 }

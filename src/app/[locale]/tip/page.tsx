@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { FaStar } from "react-icons/fa";
 import {
     TonConnectButton,
@@ -11,19 +12,17 @@ import {
 } from "@tonconnect/ui-react";
 import Image from "next/image";
 import { Page } from "@/components/Page";
-
 import {
     initDataState as _initDataState,
     useSignal,
     type User as TgUser,
 } from "@telegram-apps/sdk-react";
-
 import { openInvoice } from "@telegram-apps/sdk-react";
 
 const tonPresets = [1, 2.5, 5, 10];
-const starsPresets = [10, 25, 50, 100];
 
 export default function TipPage() {
+    const t = useTranslations("Tip");
     const [tab, setTab] = useState<"stars" | "ton">("stars");
     const [stars, setStars] = useState<number>(10);
     const [amount, setTon] = useState<number | "">(1);
@@ -40,15 +39,13 @@ export default function TipPage() {
 
     useEffect(() => {
         if (!telegramUser) {
-            setError("Telegram пользователь не найден");
+            setError(t("telegramUserNotFound"));
             return;
         }
         setUserId(telegramUser.id);
-    }, [telegramUser]);
+    }, [telegramUser, t]);
 
     // ==== TG STARS ====
-    const handleStarsClick = (val: number) => setStars(val);
-
     const sendStarsTip = async () => {
         setError(null);
         setSuccess(null);
@@ -64,21 +61,21 @@ export default function TipPage() {
             });
             const data = await res.json();
             if (!res.ok || !data.invoiceLink) {
-                throw new Error(data.error || "Ошибка создания инвойса");
+                throw new Error(data.error || t("paymentError"));
             }
 
             openInvoice(data.invoiceLink, "url").then((status: string) => {
                 if (status === "paid") {
-                    setSuccess("Спасибо! Чаевые звёздами отправлены 🎉");
+                    setSuccess(t("starsSent"));
                 } else if (status === "cancelled") {
-                    setError("Платёж отменён");
+                    setError(t("paymentCanceled"));
                 } else {
                     setError("Платёж: " + status);
                 }
                 setLoadingStars(false);
             });
-        } catch (e: any) {
-            setError(e.message || "Ошибка отправки звёзд");
+        } catch {
+            setError(t("paymentError"));
             setLoadingStars(false);
         }
     };
@@ -96,11 +93,11 @@ export default function TipPage() {
         setSuccess(null);
 
         if (!wallet || !tonAddress) {
-            setError("Сначала подключите TON-кошелек!");
+            setError(t("connectTon"));
             return;
         }
         if (!amount || amount < 0.1) {
-            setError("Минимум 0.1 TON");
+            setError(t("minTon"));
             return;
         }
 
@@ -141,9 +138,9 @@ export default function TipPage() {
                 throw new Error(data.error || "Ошибка сервера");
             }
 
-            setSuccess("Чаевые отправлены! Спасибо 🎉");
-        } catch (e: any) {
-            setError(e.message || "Ошибка отправки TON");
+            setSuccess(t("tonSent"));
+        } catch {
+            setError("Ошибка отправки TON");
         }
     };
 
@@ -152,10 +149,10 @@ export default function TipPage() {
             <div className="flex flex-col items-center justify-center bg-gray-950 px-4 py-8">
                 <div className="bg-gray-900 rounded-2xl shadow-xl max-w-md w-full p-8">
                     <h1 className="text-3xl font-bold text-center text-purple-300 mb-2">
-                        Оставить чаевые
+                        {t("tipTitle")}
                     </h1>
                     <p className="text-center text-gray-400 mb-6">
-                        Поддержите проект — подарите звёзды Telegram или TON!
+                        {t("tipSubtitle")}
                     </p>
 
                     {/* Tabs */}
@@ -169,7 +166,7 @@ export default function TipPage() {
                             }`}
                             onClick={() => setTab("stars")}
                         >
-                            Звёзды
+                            {t("stars")}
                         </button>
                         <button
                             className={`px-4 py-2 rounded-t-lg font-semibold transition-all
@@ -190,39 +187,33 @@ export default function TipPage() {
                             <div className="mb-8">
                                 <div className="flex items-center justify-between mb-2">
                                     <span className="text-gray-200 font-medium">
-                                        Звёзды Telegram
+                                        {t("stars")}
                                     </span>
                                     <span className="flex items-center gap-1 text-yellow-400 font-bold">
                                         <FaStar className="inline" /> {stars}
                                     </span>
                                 </div>
-                                <div className="flex flex-wrap gap-2 mb-3">
-                                    {starsPresets.map((val) => (
-                                        <button
-                                            key={val}
-                                            className={`px-4 py-2 rounded-lg border transition-colors font-medium ${
-                                                stars === val
-                                                    ? "bg-yellow-400 text-white border-yellow-400"
-                                                    : "bg-gray-800 text-yellow-400 border-gray-700 hover:bg-yellow-500 hover:text-white"
-                                            }`}
-                                            onClick={() =>
-                                                handleStarsClick(val)
-                                            }
-                                        >
-                                            {val}{" "}
-                                            <FaStar className="inline mb-0.5 ml-1" />
-                                        </button>
-                                    ))}
+                                <div className="mb-4 flex items-center">
+                                    <span className="text-xs text-gray-400 mr-2">
+                                        {t("starsMin")}
+                                    </span>
                                     <input
-                                        type="number"
+                                        type="range"
                                         min={1}
                                         max={500}
                                         value={stars}
                                         onChange={(e) =>
                                             setStars(Number(e.target.value))
                                         }
-                                        className="px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 text-yellow-400 w-24 focus:outline-none focus:border-yellow-500"
+                                        className="w-full accent-yellow-400"
                                     />
+                                    <span className="text-xs text-gray-400 ml-2">
+                                        {t("starsMax")}
+                                    </span>
+                                </div>
+                                <div className="flex justify-between text-xs text-gray-500 mt-1">
+                                    <span>1</span>
+                                    <span>500</span>
                                 </div>
                             </div>
                             <button
@@ -231,8 +222,8 @@ export default function TipPage() {
                                 disabled={loadingStars}
                             >
                                 {loadingStars
-                                    ? "Ожидайте открытие оплаты…"
-                                    : "Оставить чаевые звёздами"}
+                                    ? t("paymentWait")
+                                    : t("starsSend")}
                             </button>
                         </div>
                     )}
@@ -242,7 +233,7 @@ export default function TipPage() {
                             <div className="mb-8">
                                 <div className="flex items-center justify-between mb-3">
                                     <span className="text-gray-200 font-medium">
-                                        TON (крипто-чаевые)
+                                        {t("ton")}
                                     </span>
                                     <span className="text-cyan-400 font-bold text-lg">
                                         {amount ? amount : 0} TON
@@ -290,12 +281,11 @@ export default function TipPage() {
                                     onClick={handleSendTon}
                                     className="w-full px-6 py-3 bg-gradient-to-r from-purple-700 to-cyan-600 text-white rounded-xl font-semibold shadow-lg hover:scale-[1.02] active:scale-100 transition-transform"
                                 >
-                                    Оставить чаевые TON
+                                    {t("tonSend")}
                                 </button>
                                 {!wallet && (
                                     <span className="text-xs text-gray-500">
-                                        Подключите TON-кошелёк для отправки
-                                        чаевых
+                                        {t("connectTon")}
                                     </span>
                                 )}
                             </div>

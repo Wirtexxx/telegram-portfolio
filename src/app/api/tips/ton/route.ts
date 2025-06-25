@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
         await collection.insertOne(tip);
 
         return NextResponse.json({ ok: true });
-    } catch (e) {
+    } catch {
         return NextResponse.json({ error: "Server error" }, { status: 500 });
     }
 }

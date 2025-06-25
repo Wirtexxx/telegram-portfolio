@@ -1,12 +1,7 @@
 "use client";
 
-import { type PropsWithChildren, useEffect } from "react";
-import {
-    initData,
-    miniApp,
-    useLaunchParams,
-    useSignal,
-} from "@telegram-apps/sdk-react";
+import { type PropsWithChildren } from "react";
+import { miniApp, useLaunchParams, useSignal } from "@telegram-apps/sdk-react";
 import { TonConnectUIProvider } from "@tonconnect/ui-react";
 import { AppRoot } from "@telegram-apps/telegram-ui";
 
@@ -20,7 +15,7 @@ function RootInner({ children }: PropsWithChildren) {
     const lp = useLaunchParams();
 
     const isDark = useSignal(miniApp.isDark);
-    const initDataUser = useSignal(initData.user);
+    // const initDataUser = useSignal(initData.user);
 
     // Set the user locale.
     // useEffect(() => {

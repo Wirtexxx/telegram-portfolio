@@ -1,19 +1,10 @@
 "use client";
 
 import LanguageSwitcher from "@/components/LocalSwitcher/LanguageSwitcher";
-import { FiUser, FiLogIn } from "react-icons/fi";
-import { useState } from "react";
+
 import { TonConnectButton, useTonWallet } from "@tonconnect/ui-react";
 import { bem } from "@/css/bem";
-import {
-    Avatar,
-    Cell,
-    List,
-    Navigation,
-    Placeholder,
-    Text,
-    Title,
-} from "@telegram-apps/telegram-ui";
+import { List } from "@telegram-apps/telegram-ui";
 const [, e] = bem("ton-connect-page");
 
 const TopNav = ({ locale }: { locale: string }) => {
@@ -27,10 +18,6 @@ const TopNav = ({ locale }: { locale: string }) => {
             </nav>
         );
     }
-    const {
-        account: { chain, publicKey, address },
-        device: { appName, appVersion, maxProtocolVersion, platform, features },
-    } = wallet;
     return (
         <List>
             {"imageUrl" in wallet && (
